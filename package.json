@@ -4,6 +4,9 @@
   "description": "Pioneering Autonomous AI Engine with Judea Pearl Causal Reasoning (Do-Calculus), AST Code Mutation & Live Runtime Self-Healing",
   "main": "dist/server.js",
   "type": "module",
+  "bin": {
+    "self-healing": "./dist/cli.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
