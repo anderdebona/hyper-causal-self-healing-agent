@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { CausalInferenceEngine } from './causal/graph.js';
 import { ASTMutationEngine } from './agent/mutation-engine.js';
-import { SanitySandboxRunner } from './sandbox/runner.ts';
+import { SanitySandboxRunner } from './sandbox/runner.js';
 import { LiveRuntimeHotSwapper } from './hotswap/swapper.js';
 
 const __filename = fileURLToPath(import.meta.url);
