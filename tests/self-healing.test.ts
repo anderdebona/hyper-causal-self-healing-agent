@@ -74,3 +74,21 @@ describe('Healing Policy Engine', () => {
     expect(decision.ruleName).toBe('CUSTOM_ALERT');
   });
 });
+
+import { IncidentTimeline } from '../src/agent/incident-timeline.js';
+
+describe('Incident Timeline', () => {
+  it('should record and track incidents', () => {
+    const tl = new IncidentTimeline();
+    const inc = tl.record(0.8, 'CPU spike detected');
+    expect(inc.severity).toBe(0.8);
+    expect(tl.getActive().length).toBe(1);
+  });
+  it('should resolve incidents', () => {
+    const tl = new IncidentTimeline();
+    const inc = tl.record(0.5, 'Memory leak');
+    tl.resolve(inc.id, 'auto-patch');
+    expect(tl.getActive().length).toBe(0);
+    expect(tl.getAll().length).toBe(1);
+  });
+});
