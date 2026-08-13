@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software in research or autonomous agent systems, please cite it as below."
+authors:
+  - family-names: "Debona"
+    given-names: "Anderson"
+    alias: "anderdebona"
+title: "Hyper-Causal Self-Healing Agent: Judea Pearl Do-Calculus & AST Runtime Hot-Swapping"
+version: 4.0.0
+date-released: 2026-08-13
+url: "https://github.com/anderdebona/hyper-causal-self-healing-agent"
+license: MIT

@@ -92,3 +92,46 @@ describe('Incident Timeline', () => {
     expect(tl.getAll().length).toBe(1);
   });
 });
+
+describe('BayesianInterventionEngine (v4.0.0)', () => {
+  it('should evaluate do(X) risk reduction on failure node', async () => {
+    const { BayesianInterventionEngine } = await import('../src/causal/bayesian-intervention.js');
+    const engine = new BayesianInterventionEngine();
+
+    engine.addVariable({
+      name: 'NullPointerBug',
+      priorProbability: 0.8,
+      conditionalProbability: () => 0.8,
+    });
+
+    engine.addVariable({
+      name: 'AppCrash',
+      priorProbability: 0.1,
+      conditionalProbability: (parents) => parents.get('NullPointerBug') ? 0.95 : 0.05,
+    }, ['NullPointerBug']);
+
+    const result = engine.evaluateIntervention('NullPointerBug', false, 'AppCrash', 500);
+    expect(result.priorRisk).toBeGreaterThan(0.5);
+    expect(result.posteriorRisk).toBeLessThan(0.2);
+    expect(result.riskReduction).toBeGreaterThan(0.3);
+    expect(result.recommendation).toBe('EXECUTE_PATCH');
+  });
+});
+
+describe('AutomatedRollbackStrategist (v4.0.0)', () => {
+  it('should trigger rollback when failure threshold is reached', async () => {
+    const { AutomatedRollbackStrategist } = await import('../src/agent/rollback-strategist.js');
+    const strategist = new AutomatedRollbackStrategist(2);
+
+    const snap = strategist.takeSnapshot('const healthy = true;');
+    expect(snap.snapshotId).toBeTruthy();
+
+    const d1 = strategist.recordHealthStatus(false);
+    expect(d1.shouldRollback).toBe(false);
+
+    const d2 = strategist.recordHealthStatus(false);
+    expect(d2.shouldRollback).toBe(true);
+    expect(d2.targetSnapshotId).toBe(snap.snapshotId);
+  });
+});
+
