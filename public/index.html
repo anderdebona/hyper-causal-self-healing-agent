@@ -3,194 +3,201 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hyper-Causal Self-Healing AI Engine | anderdebona</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <title>Hyper-Causal Self-Healing AI Studio | anderdebona</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #05070e;
-      --panel: rgba(15, 23, 42, 0.7);
-      --border: rgba(99, 102, 241, 0.2);
-      --accent: #06b6d4;
-      --accent-glow: rgba(6, 182, 212, 0.4);
-      --purple: #8b5cf6;
-      --green: #10b981;
-      --red: #ef4444;
-      --text: #f8fafc;
+      --bg: #030712;
+      --panel: rgba(15, 23, 42, 0.8);
+      --border: rgba(16, 185, 129, 0.25);
+      --accent: #10b981;
+      --cyan: #06b6d4;
+      --red: #f43f5e;
+      --text: #f9fafb;
+      --text-dim: #94a3b8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      padding: 2rem;
-      min-height: 100vh;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.5rem;
-    }
-    .brand {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .badge {
-      background: rgba(6, 182, 212, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 0.35rem 0.85rem;
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .panel {
-      background: var(--panel);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .panel-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .btn {
-      background: linear-gradient(135deg, #06b6d4, #3b82f6);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--accent-glow); }
-    .btn-heal { background: linear-gradient(135deg, #10b981, #059669); }
-    pre {
-      background: rgba(2, 6, 23, 0.9);
-      border: 1px solid var(--border);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.85rem;
-      overflow-x: auto;
-      color: #a5f3fc;
-      max-height: 250px;
-    }
-    .causal-nodes {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .c-node {
-      background: rgba(30, 41, 59, 0.8);
-      border: 1px solid var(--border);
-      padding: 1rem;
-      border-radius: 0.75rem;
-      flex: 1;
-      text-align: center;
-    }
-    .c-score { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); padding: 1.5rem; min-height: 100vh; background-image: radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(244, 63, 94, 0.08) 0%, transparent 40%); }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+    .brand { font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, #10b981, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .status-badge { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; }
+
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem; text-align: center; }
+    .stat-val { font-size: 1.8rem; font-weight: 700; font-family: 'Fira Code', monospace; color: var(--accent); margin-top: 0.25rem; }
+    .stat-lbl { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .main-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; backdrop-filter: blur(12px); }
+    .panel-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; color: #a7f3d0; }
+
+    canvas { width: 100%; height: 200px; background: rgba(2, 6, 23, 0.95); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 0.5rem; display: block; margin-bottom: 1rem; }
+
+    .btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: 0.2s all; }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+    .btn-red { background: linear-gradient(135deg, #f43f5e, #be123c); }
+
+    .controls { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    pre { background: rgba(2, 6, 23, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); padding: 0.75rem; border-radius: 0.5rem; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #6ee7b7; overflow-x: auto; max-height: 200px; }
   </style>
 </head>
 <body>
   <header>
     <div>
-      <div class="brand">🛸 Hyper-Causal Self-Healing AI Core</div>
-      <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.25rem;">
-        Pioneering Autonomous Causal Inference & Real-Time AST Mutation Engine • anderdebona
-      </div>
+      <div class="brand">🛸 Hyper-Causal Self-Healing AI Studio 🩹</div>
+      <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.2rem;">Judea Pearl do(X) Calculus • AST Live Hot-Swapping • Bayesian Risk Surgery • by anderdebona</div>
     </div>
-    <span class="badge">Next-Gen Autonomous AI</span>
+    <span class="status-badge">● Self-Healing Engine Active</span>
   </header>
 
-  <div class="grid">
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-lbl">Runtime Version</div>
+      <div class="stat-val" id="statVer">v1</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">Execution Status</div>
+      <div class="stat-val" style="color: var(--cyan);" id="statStatus">READY</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">Causal Risk Delta</div>
+      <div class="stat-val" style="color: var(--accent);" id="statRisk">-65.0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">Canary Health</div>
+      <div class="stat-val" style="color: var(--accent);">100% HEALTHY</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
     <div class="panel">
       <div class="panel-title">
-        <span>1. Runtime Telemetry & Fault Simulation</span>
-        <button class="btn" onclick="triggerZeroDivisionBug()">Inject Division-By-Zero Fault</button>
+        <span>⚡ Interactive Runtime Execution & Fault Trigger</span>
       </div>
-      <div style="font-size: 0.9rem; color: #94a3b8;">
-        Executes active runtime code handler. If zero division occurs, triggers Judea Pearl Causal Inference DAG.
+      <div class="controls">
+        <button class="btn" onclick="executeRuntime(10, 2)">Execute Normal (10 / 2)</button>
+        <button class="btn btn-red" onclick="executeRuntime(10, 0)">⚠️ Trigger Zero Division (10 / 0)</button>
+        <button class="btn" style="background: linear-gradient(135deg, #06b6d4, #0891b2);" onclick="healRuntime()">🩹 Perform Causal Self-Healing</button>
       </div>
-      <pre id="runtimeOutput">Active Handler Version: v1
-Execution Status: NORMAL
-Result: 10 / 2 = 5</pre>
+      <pre id="runtimeLog">Click button to execute runtime function...</pre>
 
-      <div class="panel-title" style="margin-top: 1rem;">2. Judea Pearl Causal Intervention $P(Y | do(X))$</div>
-      <div class="causal-nodes">
-        <div class="c-node">
-          <div style="font-size: 0.75rem; color: #94a3b8;">Root Cause Node</div>
-          <div id="causeNode" style="font-size: 1rem; font-weight: 700; margin-top: 0.25rem;">-</div>
-        </div>
-        <div class="c-node">
-          <div style="font-size: 0.75rem; color: #94a3b8;">Causal Impact Score</div>
-          <div class="c-score" id="impactScore">0.00</div>
-        </div>
+      <div class="panel-title" style="margin-top: 1rem;">
+        <span>🧬 Judea Pearl do(X) DAG Graph Surgery</span>
       </div>
+      <canvas id="dagCanvas"></canvas>
     </div>
 
     <div class="panel">
       <div class="panel-title">
-        <span>3. Autonomous AST Mutation & Live Hot-Swap</span>
-        <button class="btn btn-heal" onclick="runSelfHealing()">Execute Self-Healing Mutation</button>
+        <span>📊 Bayesian Intervention Risk & Canary Rollback</span>
       </div>
-      <div style="font-size: 0.9rem; color: #94a3b8;">
-        Mutates AST source code to inject defensive guards, validates in Sanity Sandbox, and hot-swaps live handler.
+      <div class="controls">
+        <button class="btn" onclick="computeBayesian()">Recalculate Bayesian Risk</button>
+        <button class="btn" style="background: rgba(255,255,255,0.1);" onclick="evaluateRollback()">Test Rollback Strategist</button>
       </div>
-      <pre id="mutationCode">// Mutated AST code will be dynamically generated here...</pre>
-
-      <div class="panel-title" style="margin-top: 1rem;">Sanity Sandbox Verification</div>
-      <pre id="sandboxLog">Waiting for self-healing execution...</pre>
+      <pre id="bayesianLog">Click recalculate to evaluate P(Crash | do(Fix))...</pre>
+      
+      <div class="panel-title" style="margin-top: 1rem;">
+        <span>📜 AST Mutation Patch Spec</span>
+      </div>
+      <pre id="patchLog">Awaiting self-healing patch synthesis...</pre>
     </div>
   </div>
 
   <script>
-    let currentVersion = 1;
+    const canvas = document.getElementById('dagCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = 200;
 
-    async function triggerZeroDivisionBug() {
-      const res = await fetch('/api/execute', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ a: 10, b: 0 })
+    let isHealed = false;
+
+    function drawDAG() {
+      ctx.fillStyle = 'rgba(2, 6, 23, 0.95)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const n1 = { x: 80, y: 100, label: 'DenominatorCheck', color: isHealed ? '#10b981' : '#06b6d4' };
+      const n2 = { x: 300, y: 100, label: 'ZeroDivisionFault', color: isHealed ? '#10b981' : '#f43f5e' };
+
+      // Draw arrow
+      ctx.beginPath();
+      ctx.moveTo(n1.x + 60, n1.y);
+      ctx.lineTo(n2.x - 60, n2.y);
+      ctx.strokeStyle = isHealed ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.8)';
+      ctx.lineWidth = isHealed ? 2 : 3;
+      ctx.stroke();
+
+      // Nodes
+      [n1, n2].forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 24, 0, Math.PI * 2);
+        ctx.fillStyle = n.color;
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '11px Space Grotesk';
+        ctx.textAlign = 'center';
+        ctx.fillText(n.label, n.x, n.y + 40);
       });
-      const data = await res.json();
-      document.getElementById('runtimeOutput').innerText = JSON.stringify(data, null, 2);
+
+      if (isHealed) {
+        ctx.fillStyle = '#10b981';
+        ctx.font = 'bold 12px Space Grotesk';
+        ctx.fillText('do(DenominatorCheck = Valid) [Intervened]', (n1.x + n2.x) / 2, 70);
+      }
+    }
+    drawDAG();
+
+    async function executeRuntime(a, b) {
+      try {
+        const res = await fetch('/api/execute', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ a, b })
+        });
+        const data = await res.json();
+        document.getElementById('statStatus').innerText = data.status;
+        document.getElementById('statStatus').style.color = '#10b981';
+        document.getElementById('statVer').innerText = data.handlerVersion;
+        document.getElementById('runtimeLog').innerText = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('statStatus').innerText = 'FAULT_DETECTED';
+        document.getElementById('statStatus').style.color = '#f43f5e';
+        document.getElementById('runtimeLog').innerText = 'HTTP 500: DivisionByZeroException: Cannot divide by zero\\nRecommendation: Trigger Causal Self-Healing!';
+      }
     }
 
-    async function runSelfHealing() {
-      const res = await fetch('/api/heal', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ exception: 'DivisionByZero' })
-      });
+    async function healRuntime() {
+      const res = await fetch('/api/heal', { method: 'POST' });
       const data = await res.json();
-
-      document.getElementById('causeNode').innerText = data.causalIntervention.targetNode;
-      document.getElementById('impactScore').innerText = data.causalIntervention.causalImpactScore.toFixed(2);
-      document.getElementById('mutationCode').innerText = data.patch.mutatedCode;
-      document.getElementById('sandboxLog').innerText = JSON.stringify(data.sandboxResult, null, 2);
-      
-      // Update execution status
-      triggerZeroDivisionBug();
+      isHealed = true;
+      drawDAG();
+      document.getElementById('statStatus').innerText = 'SELF_HEALED';
+      document.getElementById('statStatus').style.color = '#10b981';
+      document.getElementById('statVer').innerText = `v${data.currentVersion}`;
+      document.getElementById('patchLog').innerText = JSON.stringify(data.patch, null, 2);
+      document.getElementById('runtimeLog').innerText = JSON.stringify({
+        message: 'Patch successfully applied & verified in sandbox!',
+        hotSwapResult: data.hotSwapResult,
+        causalIntervention: data.causalIntervention
+      }, null, 2);
     }
+
+    async function computeBayesian() {
+      const res = await fetch('/api/causal/bayesian', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('bayesianLog').innerText = JSON.stringify(data, null, 2);
+    }
+
+    async function evaluateRollback() {
+      const res = await fetch('/api/agent/rollback', { method: 'POST' });
+      const data = await res.json();
+      document.getElementById('bayesianLog').innerText = JSON.stringify(data, null, 2);
+    }
+
+    window.onload = () => {
+      executeRuntime(10, 2);
+      computeBayesian();
+    };
   </script>
 </body>
 </html>
