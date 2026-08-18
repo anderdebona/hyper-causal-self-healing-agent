@@ -135,3 +135,51 @@ describe('AutomatedRollbackStrategist (v4.0.0)', () => {
   });
 });
 
+describe('StructuralCounterfactualTwinEngine (v5.0.0)', () => {
+  it('should perform Pearl 3-step abduction-action-deduction counterfactual inference', async () => {
+    const { StructuralCounterfactualTwinEngine } = await import('../src/causal/structural-counterfactual-twin.js');
+    const engine = new StructuralCounterfactualTwinEngine();
+
+    const factualState = {
+      cpu_utilization: 90,
+      db_connections: 150,
+      memory_pressure: 80,
+      latency_ms: 220,
+      error_rate_pct: 45
+    };
+
+    const res = engine.evaluateCounterfactual(
+      factualState,
+      { variable: 'cpu_utilization', forcedValue: 20 },
+      'latency_ms'
+    );
+
+    expect(res.factualValue).toBe(220);
+    expect(res.counterfactualValue).toBeLessThan(res.factualValue);
+    expect(res.deltaImpact).toBeGreaterThan(50);
+    expect(res.percentageImprovement).toBeGreaterThan(20);
+  });
+});
+
+describe('ActiveInferenceHomeostasisEngine (v5.0.0)', () => {
+  it('should compute variational free energy and recommend corrective policy', async () => {
+    const { ActiveInferenceHomeostasisEngine } = await import('../src/agent/active-inference-homeostasis.js');
+    const engine = new ActiveInferenceHomeostasisEngine();
+
+    const stressedState = {
+      cpuUsage: 95,
+      memoryUsage: 92,
+      requestLatency: 450,
+      errorRate: 0.12
+    };
+
+    const fe = engine.computeVariationalFreeEnergy(stressedState);
+    expect(fe).toBeGreaterThan(10);
+
+    const decision = engine.selectOptimalAction(stressedState);
+    expect(decision.recommendedAction.expectedFreeEnergy).toBeLessThan(fe);
+    expect(decision.candidateRankings.length).toBe(4);
+  });
+});
+
+

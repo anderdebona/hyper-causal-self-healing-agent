@@ -7,6 +7,8 @@ import { SanitySandboxRunner } from './sandbox/runner.js';
 import { LiveRuntimeHotSwapper } from './hotswap/swapper.js';
 import { BayesianInterventionEngine, CausalVariable } from './causal/bayesian-intervention.js';
 import { AutomatedRollbackStrategist } from './agent/rollback-strategist.js';
+import { StructuralCounterfactualTwinEngine } from './causal/structural-counterfactual-twin.js';
+import { ActiveInferenceHomeostasisEngine } from './agent/active-inference-homeostasis.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +25,9 @@ causalEngine.addNode('ZeroDivisionFault', 'Division By Zero Exception', ['Denomi
 
 const rollbackStrategist = new AutomatedRollbackStrategist(3);
 rollbackStrategist.takeSnapshot('function calculateRatio(a, b) { return a / b; }', { version: 'v1.0.0' });
+
+const twinEngine = new StructuralCounterfactualTwinEngine();
+const activeInference = new ActiveInferenceHomeostasisEngine();
 
 let currentHandler = (a: number, b: number) => {
   if (b === 0) throw new Error('DivisionByZeroException: Cannot divide by zero');
@@ -73,6 +78,33 @@ app.post('/api/heal', (req, res) => {
   });
 });
 
+app.post('/api/causal/counterfactual-twin', (req, res) => {
+  const factualState = req.body.factualState || {
+    cpu_utilization: 88,
+    db_connections: 160,
+    memory_pressure: 75,
+    latency_ms: 240,
+    error_rate_pct: 38
+  };
+  const intervention = req.body.intervention || { variable: 'cpu_utilization', forcedValue: 25 };
+  const targetVar = req.body.targetVariable || 'latency_ms';
+
+  const result = twinEngine.evaluateCounterfactual(factualState, intervention, targetVar);
+  res.json(result);
+});
+
+app.post('/api/agent/active-inference', (req, res) => {
+  const currentState = req.body.state || {
+    cpuUsage: 92,
+    memoryUsage: 88,
+    requestLatency: 380,
+    errorRate: 0.08
+  };
+
+  const decision = activeInference.selectOptimalAction(currentState);
+  res.json(decision);
+});
+
 app.post('/api/causal/bayesian', (req, res) => {
   const bayesianEngine = new BayesianInterventionEngine();
   
@@ -100,11 +132,6 @@ app.post('/api/causal/bayesian', (req, res) => {
   res.json(interventionResult);
 });
 
-app.post('/api/agent/rollback', (req, res) => {
-  const decision = rollbackStrategist.recordHealthStatus(false);
-  res.json({ decision, snapshots: rollbackStrategist.getSnapshots() });
-});
-
 app.listen(PORT, () => {
-  console.log(`🚀 Hyper-Causal Self-Healing AI Engine Turbocharged on http://localhost:${PORT}`);
+  console.log(`🚀 Hyper-Causal Self-Healing AI Engine v5.0.0 on http://localhost:${PORT}`);
 });

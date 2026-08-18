@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hyper-Causal Self-Healing AI Studio | anderdebona</title>
+  <title>Hyper-Causal Self-Healing AI Studio v5.0.0 | anderdebona</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #030712;
-      --panel: rgba(15, 23, 42, 0.8);
+      --panel: rgba(15, 23, 42, 0.85);
       --border: rgba(16, 185, 129, 0.25);
       --accent: #10b981;
       --cyan: #06b6d4;
+      --amber: #f59e0b;
       --red: #f43f5e;
       --text: #f9fafb;
       --text-dim: #94a3b8;
@@ -22,20 +23,21 @@
     .brand { font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, #10b981, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .status-badge { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; }
 
-    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-    .stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem; text-align: center; }
-    .stat-val { font-size: 1.8rem; font-weight: 700; font-family: 'Fira Code', monospace; color: var(--accent); margin-top: 0.25rem; }
-    .stat-lbl { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+    .stats-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.85rem; text-align: center; }
+    .stat-val { font-size: 1.5rem; font-weight: 700; font-family: 'Fira Code', monospace; color: var(--accent); margin-top: 0.2rem; }
+    .stat-lbl { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
 
     .main-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.5rem; }
-    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; backdrop-filter: blur(12px); }
-    .panel-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; color: #a7f3d0; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; backdrop-filter: blur(12px); margin-bottom: 1.5rem; }
+    .panel-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; color: #a7f3d0; }
 
     canvas { width: 100%; height: 200px; background: rgba(2, 6, 23, 0.95); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 0.5rem; display: block; margin-bottom: 1rem; }
 
-    .btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: 0.2s all; }
+    .btn { background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.55rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: 0.2s all; font-size: 0.85rem; }
     .btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
     .btn-red { background: linear-gradient(135deg, #f43f5e, #be123c); }
+    .btn-cyan { background: linear-gradient(135deg, #06b6d4, #0891b2); }
 
     .controls { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
     pre { background: rgba(2, 6, 23, 0.95); border: 1px solid rgba(255, 255, 255, 0.08); padding: 0.75rem; border-radius: 0.5rem; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #6ee7b7; overflow-x: auto; max-height: 200px; }
@@ -44,10 +46,10 @@
 <body>
   <header>
     <div>
-      <div class="brand">🛸 Hyper-Causal Self-Healing AI Studio 🩹</div>
-      <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.2rem;">Judea Pearl do(X) Calculus • AST Live Hot-Swapping • Bayesian Risk Surgery • by anderdebona</div>
+      <div class="brand">🛸 Hyper-Causal Self-Healing AI Studio v5.0.0 🩹</div>
+      <div style="font-size: 0.85rem; color: var(--text-dim); margin-top: 0.2rem;">Counterfactual Twin World • Active Inference Free-Energy Homeostasis • Judea Pearl do(X) • by anderdebona</div>
     </div>
-    <span class="status-badge">● Self-Healing Engine Active</span>
+    <span class="status-badge">● Autonomous Self-Healing Active</span>
   </header>
 
   <div class="stats-row">
@@ -60,94 +62,107 @@
       <div class="stat-val" style="color: var(--cyan);" id="statStatus">READY</div>
     </div>
     <div class="stat-card">
-      <div class="stat-lbl">Causal Risk Delta</div>
-      <div class="stat-val" style="color: var(--accent);" id="statRisk">-65.0%</div>
+      <div class="stat-lbl">Free Energy (F)</div>
+      <div class="stat-val" style="color: var(--amber);" id="statFE">0.00</div>
     </div>
     <div class="stat-card">
-      <div class="stat-lbl">Canary Health</div>
-      <div class="stat-val" style="color: var(--accent);">100% HEALTHY</div>
+      <div class="stat-lbl">Counterfactual Δ</div>
+      <div class="stat-val" style="color: #a78bfa;" id="statDelta">-0 ms</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">Bayesian Risk</div>
+      <div class="stat-val" style="color: var(--red);" id="statRisk">0.00</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">Active Policy</div>
+      <div class="stat-val" style="color: var(--accent); font-size: 1rem;" id="statPolicy">NOMINAL</div>
     </div>
   </div>
 
   <div class="main-grid">
     <div class="panel">
       <div class="panel-title">
-        <span>⚡ Interactive Runtime Execution & Fault Trigger</span>
+        <span>🧬 Causal DAG Graph & Surgery Canvas</span>
+        <span style="font-size: 0.8rem; color: var(--text-dim);">Judea Pearl SCM</span>
       </div>
+      <canvas id="dagCanvas" width="500" height="200"></canvas>
+
       <div class="controls">
-        <button class="btn" onclick="executeRuntime(10, 2)">Execute Normal (10 / 2)</button>
-        <button class="btn btn-red" onclick="executeRuntime(10, 0)">⚠️ Trigger Zero Division (10 / 0)</button>
-        <button class="btn" style="background: linear-gradient(135deg, #06b6d4, #0891b2);" onclick="healRuntime()">🩹 Perform Causal Self-Healing</button>
+        <button class="btn" onclick="executeCall(10, 2)">▶ Execute Nominal (10 / 2)</button>
+        <button class="btn btn-red" onclick="executeCall(10, 0)">💥 Trigger Fault (10 / 0)</button>
+        <button class="btn btn-cyan" onclick="triggerHeal()">🩹 Auto-Heal AST</button>
       </div>
-      <pre id="runtimeLog">Click button to execute runtime function...</pre>
 
       <div class="panel-title" style="margin-top: 1rem;">
-        <span>🧬 Judea Pearl do(X) DAG Graph Surgery</span>
+        <span>🔮 Pearl Counterfactual Twin World Simulator (v5.0.0)</span>
       </div>
-      <canvas id="dagCanvas"></canvas>
+      <div class="controls">
+        <button class="btn" onclick="evaluateCounterfactualTwin()">🪞 Simulate What-If Twin (do(CPU=25))</button>
+      </div>
+      <pre id="counterfactualLog">Awaiting counterfactual evaluation...</pre>
     </div>
 
     <div class="panel">
       <div class="panel-title">
-        <span>📊 Bayesian Intervention Risk & Canary Rollback</span>
+        <span>⚡ Active Inference & Free-Energy Homeostasis (v5.0.0)</span>
       </div>
       <div class="controls">
-        <button class="btn" onclick="computeBayesian()">Recalculate Bayesian Risk</button>
-        <button class="btn" style="background: rgba(255,255,255,0.1);" onclick="evaluateRollback()">Test Rollback Strategist</button>
+        <button class="btn" onclick="runActiveInference()">⚖️ Evaluate Active Inference Action</button>
       </div>
-      <pre id="bayesianLog">Click recalculate to evaluate P(Crash | do(Fix))...</pre>
-      
+      <pre id="activeInferenceLog">Awaiting policy optimization...</pre>
+
       <div class="panel-title" style="margin-top: 1rem;">
-        <span>📜 AST Mutation Patch Spec</span>
+        <span>🎯 Judea Pearl Bayesian Intervention Analysis</span>
       </div>
-      <pre id="patchLog">Awaiting self-healing patch synthesis...</pre>
+      <pre id="bayesianLog">Awaiting Bayesian surgery...</pre>
+
+      <div class="panel-title" style="margin-top: 1rem;">
+        <span>📜 Execution & Self-Healing Audit Stream</span>
+      </div>
+      <pre id="execLog">System initialized.</pre>
     </div>
   </div>
 
   <script>
     const canvas = document.getElementById('dagCanvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = canvas.offsetWidth;
-    canvas.height = 200;
 
-    let isHealed = false;
+    function drawDAG(healed = false) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    function drawDAG() {
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.95)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const n1 = { x: 80, y: 100, label: 'DenominatorCheck', color: isHealed ? '#10b981' : '#06b6d4' };
-      const n2 = { x: 300, y: 100, label: 'ZeroDivisionFault', color: isHealed ? '#10b981' : '#f43f5e' };
-
-      // Draw arrow
+      // Node A
       ctx.beginPath();
-      ctx.moveTo(n1.x + 60, n1.y);
-      ctx.lineTo(n2.x - 60, n2.y);
-      ctx.strokeStyle = isHealed ? 'rgba(16, 185, 129, 0.4)' : 'rgba(244, 63, 94, 0.8)';
-      ctx.lineWidth = isHealed ? 2 : 3;
+      ctx.arc(100, 100, 30, 0, Math.PI * 2);
+      ctx.fillStyle = healed ? 'rgba(16, 185, 129, 0.2)' : 'rgba(244, 63, 94, 0.2)';
+      ctx.fill();
+      ctx.strokeStyle = healed ? '#10b981' : '#f43f5e';
+      ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Nodes
-      [n1, n2].forEach(n => {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 24, 0, Math.PI * 2);
-        ctx.fillStyle = n.color;
-        ctx.fill();
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '11px Space Grotesk';
-        ctx.textAlign = 'center';
-        ctx.fillText(n.label, n.x, n.y + 40);
-      });
+      ctx.fillStyle = '#fff';
+      ctx.font = '11px sans-serif';
+      ctx.fillText(healed ? 'Check: OK' : 'Check: FAIL', 65, 105);
 
-      if (isHealed) {
-        ctx.fillStyle = '#10b981';
-        ctx.font = 'bold 12px Space Grotesk';
-        ctx.fillText('do(DenominatorCheck = Valid) [Intervened]', (n1.x + n2.x) / 2, 70);
-      }
+      // Arrow
+      ctx.beginPath();
+      ctx.moveTo(135, 100);
+      ctx.lineTo(335, 100);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      ctx.stroke();
+
+      // Node B
+      ctx.beginPath();
+      ctx.arc(370, 100, 30, 0, Math.PI * 2);
+      ctx.fillStyle = healed ? 'rgba(16, 185, 129, 0.2)' : 'rgba(244, 63, 94, 0.2)';
+      ctx.fill();
+      ctx.strokeStyle = healed ? '#10b981' : '#f43f5e';
+      ctx.stroke();
+
+      ctx.fillStyle = '#fff';
+      ctx.fillText(healed ? 'Fault: 0%' : 'Fault: 95%', 340, 105);
     }
-    drawDAG();
 
-    async function executeRuntime(a, b) {
+    async function executeCall(a, b) {
       try {
         const res = await fetch('/api/execute', {
           method: 'POST',
@@ -158,45 +173,53 @@
         document.getElementById('statStatus').innerText = data.status;
         document.getElementById('statStatus').style.color = '#10b981';
         document.getElementById('statVer').innerText = data.handlerVersion;
-        document.getElementById('runtimeLog').innerText = JSON.stringify(data, null, 2);
+        document.getElementById('execLog').innerText = JSON.stringify(data, null, 2);
+        drawDAG(true);
       } catch (err) {
         document.getElementById('statStatus').innerText = 'FAULT_DETECTED';
         document.getElementById('statStatus').style.color = '#f43f5e';
-        document.getElementById('runtimeLog').innerText = 'HTTP 500: DivisionByZeroException: Cannot divide by zero\\nRecommendation: Trigger Causal Self-Healing!';
+        document.getElementById('execLog').innerText = 'CRITICAL: DivisionByZeroException intercepted!';
+        drawDAG(false);
       }
     }
 
-    async function healRuntime() {
+    async function triggerHeal() {
       const res = await fetch('/api/heal', { method: 'POST' });
       const data = await res.json();
-      isHealed = true;
-      drawDAG();
-      document.getElementById('statStatus').innerText = 'SELF_HEALED';
-      document.getElementById('statStatus').style.color = '#10b981';
       document.getElementById('statVer').innerText = `v${data.currentVersion}`;
-      document.getElementById('patchLog').innerText = JSON.stringify(data.patch, null, 2);
-      document.getElementById('runtimeLog').innerText = JSON.stringify({
-        message: 'Patch successfully applied & verified in sandbox!',
-        hotSwapResult: data.hotSwapResult,
-        causalIntervention: data.causalIntervention
-      }, null, 2);
+      document.getElementById('statStatus').innerText = 'HEALED';
+      document.getElementById('statStatus').style.color = '#10b981';
+      document.getElementById('execLog').innerText = JSON.stringify(data, null, 2);
+      drawDAG(true);
     }
 
-    async function computeBayesian() {
+    async function evaluateCounterfactualTwin() {
+      const res = await fetch('/api/causal/counterfactual-twin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) });
+      const data = await res.json();
+      document.getElementById('statDelta').innerText = `-${data.deltaImpact} ms`;
+      document.getElementById('counterfactualLog').innerText = JSON.stringify(data, null, 2);
+    }
+
+    async function runActiveInference() {
+      const res = await fetch('/api/agent/active-inference', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) });
+      const data = await res.json();
+      document.getElementById('statFE').innerText = data.currentFreeEnergy;
+      document.getElementById('statPolicy').innerText = data.recommendedAction?.actionName || 'OPTIMAL';
+      document.getElementById('activeInferenceLog').innerText = JSON.stringify(data, null, 2);
+    }
+
+    async function runBayesian() {
       const res = await fetch('/api/causal/bayesian', { method: 'POST' });
       const data = await res.json();
-      document.getElementById('bayesianLog').innerText = JSON.stringify(data, null, 2);
-    }
-
-    async function evaluateRollback() {
-      const res = await fetch('/api/agent/rollback', { method: 'POST' });
-      const data = await res.json();
+      document.getElementById('statRisk').innerText = (data.posteriorRisk || 0).toFixed(2);
       document.getElementById('bayesianLog').innerText = JSON.stringify(data, null, 2);
     }
 
     window.onload = () => {
-      executeRuntime(10, 2);
-      computeBayesian();
+      drawDAG(false);
+      runBayesian();
+      evaluateCounterfactualTwin();
+      runActiveInference();
     };
   </script>
 </body>

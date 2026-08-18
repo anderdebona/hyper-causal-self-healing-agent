@@ -1,7 +1,7 @@
 {
   "name": "hyper-causal-self-healing-agent",
-  "version": "4.0.0",
-  "description": "Pioneering Autonomous AI Engine with Judea Pearl Causal Reasoning (Do-Calculus), AST Code Mutation & Live Runtime Self-Healing",
+  "version": "5.0.0",
+  "description": "PhD-Grade Hyper-Causal Self-Healing AI Agent (Structural Counterfactual Twin SCM, Active Inference Homeostasis, Judea Pearl do(X) Calculus & Live AST Mutation)",
   "main": "dist/server.js",
   "type": "module",
   "bin": {
